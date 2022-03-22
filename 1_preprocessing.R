@@ -14,7 +14,11 @@ library(tidyverse)
 library(naniar)
 library(UpSetR)
 
-#以下读入文件并进行预览
+#以下设定工作目录
+setwd("C:/Users/Administrator/Desktop/data_pipeline")
+
+
+#文件放入工作目录内并进行读取
 rawdata <- read.csv(file="rawdata_rfs.csv",
                     header = T,#第一行为列名
                     row.names = 1)#第一列为病案号
