@@ -13,19 +13,19 @@ options(stringsAsFactors = T)
 library(tidyverse)
 library(naniar)
 library(UpSetR)
-
-<<<<<<< HEAD
+library(readxl)
 #以下读入文件并进行预览
-=======
 #以下设定工作目录
-setwd("C:/Users/Administrator/Desktop/data_pipeline")
+setwd("D:/pipeline")
 
 
 #文件放入工作目录内并进行读取
->>>>>>> main
 rawdata <- read.csv(file="rawdata_rfs.csv",
                     header = T,#第一行为列名
                     row.names = 1)#第一列为病案号
+rawdata <- read_excel("3.xlsx",col_names=T,na = "na")
+
+
 
 glimpse(rawdata)#注意变量类型
 str(rawdata)
@@ -33,7 +33,7 @@ str(rawdata)
 names(rawdata)#显示所有变量名称
 
 ##以下将需部分变量变为分类变量
-vars <- c("ptumor_stage","ptumor_stage1","CRS") 
+vars <- c("ASA ") 
 rawdata<- rawdata %>%
   mutate(across(one_of(vars), as.factor))
 str(rawdata)
@@ -80,4 +80,4 @@ colnames(rawdata[,(na_names[,1]>na.per)])
 ##newdata为按照阈值删除列后内容
 ##completa_data为没有缺失的数据集
 
-save(newdata, file = "newdata_rfs.RData")
+save(newdata, file = "newdata.RData")
