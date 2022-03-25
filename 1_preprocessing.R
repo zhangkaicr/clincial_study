@@ -20,10 +20,8 @@ setwd("D:/pipeline")
 
 
 #文件放入工作目录内并进行读取
-rawdata <- read.csv(file="rawdata_rfs.csv",
-                    header = T,#第一行为列名
-                    row.names = 1)#第一列为病案号
-rawdata <- read_excel("3.xlsx",col_names=T,na = "na")
+
+rawdata <- read_excel("4.xlsx",col_names=T,na = "na")
 
 
 
@@ -81,3 +79,4 @@ colnames(rawdata[,(na_names[,1]>na.per)])
 ##completa_data为没有缺失的数据集
 
 save(newdata, file = "newdata.RData")
+

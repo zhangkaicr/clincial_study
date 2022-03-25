@@ -1,24 +1,24 @@
 {
-    "id": "CB50BAA4",
+    "id": "C0C5AF9B",
     "path": "C:/Users/85330/Desktop/clincial_study/clincial_study/4_binary_model.R",
     "project_path": "4_binary_model.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "2194284237",
     "contents": "",
-    "dirty": true,
-    "created": 1647779270709.0,
+    "dirty": false,
+    "created": 1648215566076.0,
     "source_on_save": false,
-    "relative_order": 3,
+    "relative_order": 2,
     "properties": {
-        "cursorPosition": "15,18",
-        "scrollLine": "7"
+        "cursorPosition": "23,27",
+        "scrollLine": "15"
     },
     "folds": "",
-    "lastKnownWriteTime": 1647779450,
+    "lastKnownWriteTime": 1648217621,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1647779492629,
+    "last_content_update": 1648217621608,
     "read_only": false,
     "read_only_alternatives": []
 }
