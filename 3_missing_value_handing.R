@@ -78,4 +78,5 @@ colnames(rawdata[,(na_names[,1]>na.per)])
 ##newdata为按照阈值删除列后内容
 ##completa_data为没有缺失的数据集
 
+save(newdata, file = "newdata.RData")
 

@@ -21,15 +21,15 @@ data_final <-newdata
 str(data_final)
 
 #以下将所有列名纳入一个向量并选择自变量
-allvar<- dput(names(data_final));allvar
+names(data_final)%>%dput()->allvar
 allvar <- allvar[1:18];allvar 
 
 #以下进行结果变量定义
-data_final$Pancreatic.leakage<- as.factor(data_final$Pancreatic.leakage)
-str(data_final)#注意结果变量分布
+data_final$Complication.Criteria%>%
+             as.factor()->dependent
+
 
 #以下进行单因素分析
-dependent <-"Pancreatic.leakage"
 explanatory <- allvar
 data_final  %>%
   finalfit(dependent,explanatory,

@@ -3,22 +3,22 @@
     "path": "C:/Users/85330/Desktop/clincial_study/clincial_study/4_binary_model.R",
     "project_path": "4_binary_model.R",
     "type": "r_source",
-    "hash": "2194284237",
+    "hash": "0",
     "contents": "",
-    "dirty": false,
+    "dirty": true,
     "created": 1648215566076.0,
     "source_on_save": false,
     "relative_order": 2,
     "properties": {
-        "cursorPosition": "23,27",
-        "scrollLine": "15"
+        "cursorPosition": "40,0",
+        "scrollLine": "28"
     },
     "folds": "",
-    "lastKnownWriteTime": 1648217621,
+    "lastKnownWriteTime": 1648256805,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1648217621608,
+    "last_content_update": 1648257747188,
     "read_only": false,
     "read_only_alternatives": []
 }
