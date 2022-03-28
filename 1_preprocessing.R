@@ -13,7 +13,7 @@ options(stringsAsFactors = T)
 library(tidyverse)
 library(naniar)
 library(UpSetR)
-library(readxl)
+
 #以下读入文件并进行预览
 #以下设定工作目录
 setwd("D:/pipeline")
@@ -21,20 +21,21 @@ setwd("D:/pipeline")
 
 #文件放入工作目录内并进行读取
 
-rawdata <- read_excel("4.xlsx",col_names=T,na = "na")
-
-
-
-glimpse(rawdata)#注意变量类型
-str(rawdata)
+rawdata <- read.csv("4.csv",header = T,
+                    row.names = 1,na.strings = "na")
+str(rawdata)#注意变量类型
 ##输出变量名称及转换为因子变量类型
-names(rawdata)#显示所有变量名称
 
 ##以下将需部分变量变为分类变量
 vars <- c("ASA ") 
 rawdata<- rawdata %>%
   mutate(across(one_of(vars), as.factor))
 str(rawdata)
+
+##更改变量因子水平
+rawdata$PBD <- relevel(rawdata$PBD,ref = "none")
+
+
 
 ##查看没有缺失值的行的总体数据集
 completa_data<- (rawdata[complete.cases(rawdata),])
@@ -78,4 +79,5 @@ colnames(rawdata[,(na_names[,1]>na.per)])
 ##newdata为按照阈值删除列后内容
 ##completa_data为没有缺失的数据集
 
+save(newdata,file = "newdata.RData")
 
