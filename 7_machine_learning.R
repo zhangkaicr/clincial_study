@@ -579,7 +579,7 @@ library(patchwork)
 ggsave("9-var.pdf",dpi = 300,width = 16, height = 8)
 ggsave("9-var.pdf",width = 16, height = 9)
 
-
+remotes::install_github("ehrlinger/ggRandomForests")
 
 ####################################################################################
 ### Out put the Training results

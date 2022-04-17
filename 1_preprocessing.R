@@ -21,19 +21,21 @@ setwd("D:/pipeline")
 
 #文件放入工作目录内并进行读取
 
-rawdata <- read.csv("4.csv",header = T,
-                    row.names = 1,na.strings = "na")
+rawdata <- read.csv("CRLM.csv",header = T,
+                    row.names =1 ,na.strings = "NA")
 str(rawdata)#注意变量类型
 ##输出变量名称及转换为因子变量类型
 
 ##以下将需部分变量变为分类变量
-vars <- c("ASA ") 
+vars <- c("ptumor_stage","ptumor_stage1","CRS",
+          "age_group","diameter_type ","CRS",
+          "CRS_type","cea_group") 
 rawdata<- rawdata %>%
   mutate(across(one_of(vars), as.factor))
 str(rawdata)
 
 ##更改变量因子水平
-rawdata$PBD <- relevel(rawdata$PBD,ref = "none")
+#rawdata$PBD <- relevel(rawdata$PBD,ref = "none")
 
 
 
@@ -71,13 +73,14 @@ colnames(rawdata[,(na_names[,1]>na.per)])
 
 
 ##以下筛选亚组进行保存
-#data_pattrn <- subset(newdata,grup=="ablation"&recurrence=="yes")
-
+newdata <- subset(newdata,diameter<=3)
+names(newdata)
 
 
 ##以下保存本次处理数据
 ##newdata为按照阈值删除列后内容
 ##completa_data为没有缺失的数据集
 
-save(newdata,file = "newdata.RData")
+str(newdata)
 
+save(newdata,file = "crlm3_newdata.RData")

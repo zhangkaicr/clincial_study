@@ -19,17 +19,10 @@ library(ggpubr)
 library(finalfit)
 library(condsurv)
 #以下读入文件并进行预览
-load("newdata.RData")
+load("crlm3_newdata.RData")
 explore_data <-newdata
 str(explore_data)
 
-rawdata <- read.csv(file="p.csv",
-                    header = T,#第一行为列名
-                    row.names = )#第一列为病案号
-
-
-
-table(explore_data$status)
 
 data_matched <- mutate(data_matched,grup = case_when(
   grup == 1 ~ "resection",

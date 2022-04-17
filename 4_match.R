@@ -13,37 +13,38 @@ options(stringsAsFactors = T)
 library(tidyverse)
 library(MatchIt)
 library(compareGroups)
+library(cobalt)
+library()
 
-###以下读入文件并进行预览
-load("newdata.RData")
+#以下读入文件并进行预览
+#以下设定工作目录
+setwd("D:/pipeline")
+load("crlm_newdata.RData")
 
 prematch_data <- newdata#定义后续探索数据的范围
 str(prematch_data)
 
-table(prematch_data$grup)#查看分组变量的分布情况
-
 #matchit函数需要分组变量为0和1，其中1为治疗组，0为对照组
 #以下应用mutate函数进行转换
 
-prematch_data <- mutate(prematch_data,grup = case_when(
+prematch_data <- mutate(prematch_data,grup= case_when(
   grup == "resection"~ 1 ,
   grup == "ablation" ~ 0 )) 
 
 str(prematch_data)
 
 #以下进行PSM分析，获得的分析结果为一个list
-prematch_data$ptumor_locationleft.sided
 psm<- matchit(data = prematch_data,#数据集
-              formula = grup ~ age+ptumor_locationleft.sided+gross_type+
-                              ptumor_cla+
-                              ptumor_stage+ptumor_lymph+metastasis_type+
-                              lm_number+lm_location+diameter_type+
-                              CRS+lm_pochemo+cea_type,
+              formula = grup ~ age_group+hepatitis_type+
+                ptumor_locationleft.sided+gross_type+
+                ptumor_stage1+ptumorpost_chemo+X+lm_number+
+                lm_location+diameter+CRS_type+lm_prechemo+lm_pochemo+
+                pre.tbil+pre.wbc+pre.lymph.+pre.cea,
               #以上为PSM方程，~  左侧为分组变量，右侧为待匹配变量
               method = "nearest",#此获得PSM评分后，应用什么方法进行对照组的匹配
               distance = "logit",#计算PSM评分的方法
               replace = FALSE,#是否进行有放回的匹配
-              caliper = 0.05,#卡钳值，最终选择的两组的PSM评分的差距
+              caliper = 0.2,#卡钳值，最终选择的两组的PSM评分的差距
               ratio = 1)#匹配的比例，一般为1:1到1:4
 
 match.data(psm)#显示匹配后的数据，
@@ -57,11 +58,14 @@ plot(psm,
 
 data_matched<-match.data(psm)#提取匹配后的数据集
 
+love.plot(psm, stats = c("mean.diffs"), thresholds = c(m = 0.1, 
+                                                         v = 2), abs = TRUE, binary = "std", var.order = "unadjusted")                                                       
+
 ####以下提取数据
 
 colnames(data_matched)
 
-Non_result<- descrTable(grup ~., method = 2,data = data_matched)#对比两组的基线情况，连续变量应用非参数检验
+Non_result<- descrTable(PBD ~., method = 2,data = data_matched)#对比两组的基线情况，连续变量应用非参数检验
 
 
 #以下导出结果
@@ -69,4 +73,4 @@ save(data_matched,file =  "data_matched.RData" )
 export2word(Non_result,file = "匹配后基线信息对比表.docx" )
 
 
-
+library(evaluate)
